@@ -14,7 +14,7 @@ const noteShema = new mongoose.Schema({
     },
     status:{
         type: Boolean ,
-        default : False
+        default : false
     },
     created_at: {
         type: Date,

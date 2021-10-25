@@ -1,4 +1,5 @@
-const User = require('./../models/User');
+const { User  }          = require('./../models/Models');
+
 
 
 module.exports.singUp = async ( request , response ) => {
