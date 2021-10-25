@@ -40,13 +40,13 @@ const userShema = new mongoose.Schema({
     portfolio: {
         type: mongoose.Schema.Types.ObjectId ,
         require:false,
-        ref: 'portfolio',
+        ref: 'Portfolio',
         default: null
     }
 
 
 })
 
-const User = mongoose.model('users' , userShema );
+const User = mongoose.model('User' , userShema );
 
 module.exports = User;

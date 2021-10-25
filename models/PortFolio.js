@@ -23,13 +23,19 @@ const portFulioShema = new mongoose.Schema({
     localisation:{
         type:  mongoose.Schema.Types.ObjectId ,
         require: false,
-        ref: 'localisations',
+        ref: 'Localisation',
         default: null
-    }
+    },
+    feedbacks: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Feedback"
+        }
+      ]
 });
 
 
 
-const Portfolio = mongoose.model('portfolio' , portFulioShema);
+const Portfolio = mongoose.model('Portfolio' , portFulioShema);
 
 module.exports = Portfolio;

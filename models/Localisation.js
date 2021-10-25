@@ -14,6 +14,6 @@ const localisationShema = new mongoose.Schema({
 });
 
 
-const Localisation = mongoose.model('localisations' , localisationShema);
+const Localisation = mongoose.model('Localisation' , localisationShema);
 
 module.exports = Localisation;
