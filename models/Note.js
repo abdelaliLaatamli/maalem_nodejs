@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
 
-const feedbackShema = new mongoose.Schema({
+const noteShema = new mongoose.Schema({
 
-    text : {
+    characteristic : {
         type: String ,
+        enum : [ 'time-respect' , 'prise' , 'tools' , 'Quality' ],
         required :[ true , 'please enter an text' ]
     },
     score: {
@@ -23,11 +24,10 @@ const feedbackShema = new mongoose.Schema({
         type: Date,
         default: null ,
         required: false
-    },
-    notes:[]
+    }
 
 })
 
-const Feedback = mongoose.model('Feedback' , feedbackShema );
+const Note = mongoose.model('Note' , noteShema );
 
-module.exports = Feedback;
+module.exports = Note;
