@@ -31,7 +31,13 @@ const portFulioShema = new mongoose.Schema({
           type: mongoose.Schema.Types.ObjectId,
           ref: "Feedback"
         }
-      ]
+    ],
+    categories: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Category"
+        }
+    ]
 });
 
 
