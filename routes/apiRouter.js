@@ -8,6 +8,7 @@ exports.router = (()=>{
     var apiRouter = express.Router();
 
     // user routes
+    apiRouter.route('/user/register').get( userController.singUp );
     // apiRouter.route('/user/register/').post( userAPI.register );
     // apiRouter.route('/user/login/').post( userAPI.login );
     // apiRouter.route('/user/profile').get( userAPI.getUserProfile );
