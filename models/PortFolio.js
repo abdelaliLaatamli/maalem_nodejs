@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 
-
 const portFulioShema = new mongoose.Schema({
 
     yearsExp: {
@@ -25,6 +24,11 @@ const portFulioShema = new mongoose.Schema({
         require: false,
         ref: 'Localisation',
         default: null
+    },
+    zone:{
+        type:  mongoose.Schema.Types.ObjectId ,
+        require: true,
+        ref: 'Zone' 
     },
     feedbacks: [
         {
