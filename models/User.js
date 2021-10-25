@@ -45,7 +45,18 @@ const userShema = new mongoose.Schema({
     }
     
 
-})
+});
+
+
+// fire a function before doc saved to db
+userShema.pre('save', async function(next) {
+    console.log( this );
+    
+    // const salt = await bcrypt.genSalt();
+    // this.password = await bcrypt.hash(this.password, salt);
+    next();
+});
+  
 
 const User = mongoose.model('User' , userShema );
 
