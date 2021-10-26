@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-
+const bcrypt = require('bcrypt');
+const { isEmail } = require('validator');
 
 
 const userShema = new mongoose.Schema({
@@ -9,7 +10,9 @@ const userShema = new mongoose.Schema({
     },
     email: {
         type: String ,
-        required : [true , 'please enter email']
+        required : [true , 'please enter email'],
+        unique: true ,
+        isEmail: [true , 'please entre valide email']
     },
     password: {
         type: String ,
@@ -50,11 +53,11 @@ const userShema = new mongoose.Schema({
 
 // fire a function before doc saved to db
 userShema.pre('save', async function(next) {
-    console.log( this );
-    
-    // const salt = await bcrypt.genSalt();
-    // this.password = await bcrypt.hash(this.password, salt);
+
+    const salt = await bcrypt.genSalt();
+    this.password = await bcrypt.hash( this.password , salt );
     next();
+
 });
   
 
