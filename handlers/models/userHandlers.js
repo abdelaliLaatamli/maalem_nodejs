@@ -12,11 +12,15 @@ const userHandleErrors = (err) => {
     if (err.message === 'incorrect password') {
         errors['password'] = 'That password is incorrect';
     }
+
+    // incorrect password
+    if (err.message === 'User not Found') {
+        errors['user'] = 'This user is not found';
+    }
   
     // duplicate email error
     if (err.code === 11000) {
         errors['email'] = 'that email is already registered';
-        // return errors;
     }
   
     // validation errors
