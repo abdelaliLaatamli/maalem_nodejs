@@ -16,7 +16,7 @@ const userHandleErrors = (err) => {
     // duplicate email error
     if (err.code === 11000) {
         errors['email'] = 'that email is already registered';
-        return errors;
+        // return errors;
     }
   
     // validation errors
@@ -27,6 +27,8 @@ const userHandleErrors = (err) => {
     }
    
     // TODO: ... add more handlers
+    errors['err'] = err.message;
+    // console.log()
     return errors;
 }
 
