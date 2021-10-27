@@ -1,4 +1,10 @@
-const { createCategory , updateCategory , allCategories , getCategory , deleleCategory  } = require("./../repositories/categoryRepository");
+const { 
+    createCategory ,
+    updateCategory ,
+    allCategories ,
+    getCategory ,
+    deleleCategory
+} = require("./../repositories/categoryRepository");
 const categoryHandleErrors = require('./../handlers/models/categoryHandlers');
 
 

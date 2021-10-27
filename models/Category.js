@@ -12,17 +12,7 @@ const categoryShema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category" ,
         default: null
-    },
-    // subCategories: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Category"
-    // }],
-    skills: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Skill"
-        }
-    ]
+    }
 
 }, { versionKey: false })
 

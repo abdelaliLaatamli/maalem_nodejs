@@ -19,7 +19,13 @@ const skillShema = new mongoose.Schema({
         type: Date,
         default: null ,
         required: false
+    },
+    category:{
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Category",
+          required : [true , 'please specify category!']
     }
+    
 
 },{ versionKey: false });
 
