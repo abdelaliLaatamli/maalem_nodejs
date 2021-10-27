@@ -14,6 +14,8 @@ exports.router = (()=>{
     // apiRouter.route('/user/profile').get( userAPI.getUserProfile );
     // apiRouter.route('/user').get( userAPI.getuserDetails );
     // apiRouter.route('/user').put( userAPI.getUserUpdate );
+
+    // category routes
     apiRouter.route('/categories').get( categoryController.allCategories );
     apiRouter.route('/categories/:id').get( categoryController.getCategory );
     apiRouter.route('/categories').post( categoryController.createCategory );

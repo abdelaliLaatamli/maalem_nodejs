@@ -3,7 +3,8 @@ const { Category } = require('./../models');
 
 module.exports.allCategories = async () => {
     try{
-        return  await Category.find({});
+        return  await Category.find();
+        // populate('parent');
     }catch(e){
         throw e
     }
@@ -38,13 +39,15 @@ module.exports.createCategory = async ( category ) => {
 
 module.exports.updateCategory = async ( categoryId , category ) => {
     try{
+
         const categoryFound = await Category.findById(categoryId);
 
         if( !categoryFound ){
             throw Error('Category Not found');
         }
-        const updatedCategory = await Category.findByIdAndUpdate( categoryId , category , { new: true } );
-        return updatedCategory;
+
+        return await Category.findByIdAndUpdate( categoryId , category , { new: true } );
+
     }catch(e){
         throw e; 
     }
@@ -58,9 +61,9 @@ module.exports.deleleCategory = async ( categoryId ) => {
         if( !categoryFound ){
             throw Error('Category Not found');
         }
-        
-        return await Category.findByIdAndDelete(categoryId , { new: true });
-        // return await Category.findByIdAndRemove(categoryId , { new: true });
+
+        return await Category.findByIdAndDelete( categoryId );
+
     }catch(e){
         throw e ;
     }
