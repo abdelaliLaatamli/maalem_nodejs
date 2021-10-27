@@ -31,7 +31,6 @@ module.exports.login = async ( request , response ) => {
         response.status(200).json({ user: user._id , token : token });
 
     }catch(err){
-
         const errors = userHandleErrors(err);
         response.status(400).json( errors );
     }

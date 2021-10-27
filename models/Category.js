@@ -5,13 +5,13 @@ const categoryShema = new mongoose.Schema({
 
     name : {
         type: String ,
-        required :[ true , 'please enter an text' ]
+        required :[ true , 'please enter an text' ],
+        unique: true 
     },
-    subCategory: {
+    subCategories: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Category" ,
-        default: null
-    },
+        ref: "Category"
+    }],
     skills: [
         {
           type: mongoose.Schema.Types.ObjectId,

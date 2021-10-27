@@ -13,7 +13,8 @@ const portFulioShema = new mongoose.Schema({
     },
     address: {
         type: String ,
-        required: false
+        required: false,
+        default: null 
     },
     numbreVisites: {
         type:Number,
@@ -31,10 +32,10 @@ const portFulioShema = new mongoose.Schema({
         ref: 'Zone' 
     },
     feedbacks: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Feedback"
-        }
+        // {
+        //   type: mongoose.Schema.Types.ObjectId,
+        //   ref: "Feedback"
+        // }
     ],
     categories: [
         {

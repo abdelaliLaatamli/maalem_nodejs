@@ -1,5 +1,6 @@
 const express = require('express') ;
 const userController = require('./../controllers/userController');
+const categoryController = require('./../controllers/categoryController');
 
 
 // routes 
@@ -13,6 +14,7 @@ exports.router = (()=>{
     // apiRouter.route('/user/profile').get( userAPI.getUserProfile );
     // apiRouter.route('/user').get( userAPI.getuserDetails );
     // apiRouter.route('/user').put( userAPI.getUserUpdate );
+    apiRouter.route('/categories').post( categoryController.createCategory  );
 
     return apiRouter;
 
