@@ -16,7 +16,7 @@ exports.router = (()=>{
     // user routes
     apiRouter.route('/register').post( userController.singUp );
     apiRouter.route('/login').post( userController.login );
-    // apiRouter.route('/user/profile').get( userAPI.getUserProfile );
+    apiRouter.route('/user/profile').get( userController.userProfile );
     // apiRouter.route('/user').get( userAPI.getuserDetails );
     // apiRouter.route('/user').put( userAPI.getUserUpdate );
 

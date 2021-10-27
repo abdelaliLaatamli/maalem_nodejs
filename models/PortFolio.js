@@ -31,6 +31,7 @@ const portFulioShema = new mongoose.Schema({
         require: true,
         ref: 'Zone' 
     },
+    oldUser: { type: String , default: null},
     feedbacks: [
         {
           type: mongoose.Schema.Types.ObjectId,

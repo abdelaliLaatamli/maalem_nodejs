@@ -33,3 +33,23 @@ module.exports.findUser = async ( email , password ) => {
         throw err ;
     }
 }
+
+
+module.exports.userProfile = async ( userId ) => {
+
+    try{
+
+        // const user = await User.findById( userId )//.where({ status : true }).populate('cities');
+        const user = await User.findById( userId ).where({ status : true }).populate('portfolio');
+        
+        if( !user ){
+            throw Error('User Not found');
+        }
+
+        return user ;
+    }catch(e){
+        throw e
+    }
+
+
+}

@@ -7,7 +7,7 @@ module.exports.singUp = async ( request , response ) => {
     let { username , email, password , sex , bday } = request.body;
 
     try {
-        const user = await categoryRepository.createUser({ username , email, password , sex , bday });
+        const user = await userRepository.createUser({ username , email, password , sex , bday });
         const token = generateToken(user._id);
         response.status(201).json({ user: user._id , token : token });
     } catch(err) {
@@ -25,7 +25,7 @@ module.exports.login = async ( request , response ) => {
     const { email , password } = request.body;
 
     try{
-        const user = await categoryRepository.findUser(email , password);
+        const user = await userRepository.findUser(email , password);
 
         const token = generateToken(user._id);
         response.status(200).json({ user: user._id , token : token });
@@ -37,3 +37,20 @@ module.exports.login = async ( request , response ) => {
 
 
 }
+
+
+module.exports.userProfile = async( request , response ) => {
+
+    const loggedUserId = "617991af85cc9684aa6759aa"
+
+
+    try{
+        const userProfile = await userRepository.userProfile(loggedUserId);
+        response.status(200).json( userProfile );
+    }catch(err){
+        const errors = userHandleErrors(err);
+        response.status(400).json( errors );
+    }
+    
+
+}   
