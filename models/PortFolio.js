@@ -32,15 +32,21 @@ const portFulioShema = new mongoose.Schema({
         ref: 'Zone' 
     },
     feedbacks: [
-        // {
-        //   type: mongoose.Schema.Types.ObjectId,
-        //   ref: "Feedback"
-        // }
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Feedback"
+        }
     ],
     categories: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Category"
+        }
+    ],
+    resources: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Resource"
         }
     ]
 },{ versionKey: false });
