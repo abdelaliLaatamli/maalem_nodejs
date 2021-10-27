@@ -41,8 +41,7 @@ module.exports.login = async ( request , response ) => {
 
 module.exports.userProfile = async( request , response ) => {
 
-    const loggedUserId = "617991af85cc9684aa6759aa"
-
+    const loggedUserId = "6179ba77b1b554b91ad96b08";
 
     try{
         const userProfile = await userRepository.userProfile(loggedUserId);

@@ -4,7 +4,8 @@ const {
     categoryController , 
     skillController ,
     zoneController ,
-    cityController
+    cityController,
+    portFolioController
 } = require('./../controllers');
 
 
@@ -51,6 +52,9 @@ exports.router = (()=>{
     apiRouter.route('/cities/:id').put( cityController.updateCity );
     apiRouter.route('/cities/:id').delete( cityController.deleteCity );
 
+
+    // portfolio routes
+    apiRouter.route('/portfolios').post( portFolioController.createPortFolio );
 
     return apiRouter;
 

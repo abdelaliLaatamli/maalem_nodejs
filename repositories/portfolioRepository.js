@@ -1,4 +1,5 @@
-const { PortFolio } = require('../models');
+const { User , PortFolio } = require('../models');
+const mongoose = require('mongoose');
 
 
 // module.exports.getCities = async () => {
@@ -31,7 +32,22 @@ module.exports.getPortFolio = async ( userId ) => {
 module.exports.createPortFolio = async ( userId , portFolio ) => {
 
     try{
-        return await PortFolio.create( city );
+        // mongoose
+        // const session = await PortFolio.startSession();
+        const session = await mongoose.startSession();
+
+        const createdPortFolios = await session.withTransaction( async () => {
+            console.log(portFolio)
+            const createdPortFolio = await PortFolio.create( [portFolio] , { session: session } );
+            console.log(createdPortFolio._id)
+            // await User.findByIdAndUpdate( userId , { portfolio : createdPortFolio._id } );
+            await User.findByIdAndUpdate( userId , { portfolio :createdPortFolio._id } , { session: session });
+            return createdPortFolio;
+            // return Customer.create([{ name: 'Test' }], { session: session })
+        });
+ 
+        session.endSession();
+        return createdPortFolios;
     } catch(e) {
         throw e;
     }
