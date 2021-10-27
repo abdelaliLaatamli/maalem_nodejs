@@ -1,5 +1,10 @@
 const express = require('express') ;
-const { userController , categoryController , skillController } = require('./../controllers');
+const {
+    userController , 
+    categoryController , 
+    skillController ,
+    zoneController
+} = require('./../controllers');
 
 
 // routes 
@@ -29,6 +34,14 @@ exports.router = (()=>{
     apiRouter.route('/skills').post( skillController.createSkill );
     apiRouter.route('/skills/:id').put( skillController.updateSkill );
     apiRouter.route('/skills/:id').delete( skillController.deleteSkill );
+
+
+    // zone routes
+    apiRouter.route('/zones').get( zoneController.getZones );
+    apiRouter.route('/zones/:id').get( zoneController.getZone );
+    apiRouter.route('/zones').post( zoneController.createZone );
+    apiRouter.route('/zones/:id').put( zoneController.updateZone );
+    apiRouter.route('/zones/:id').delete( zoneController.deleteZone );
 
 
     return apiRouter;

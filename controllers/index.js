@@ -5,5 +5,5 @@ module.exports = {
     portFolioController : require('./portFolioController'),
     // resourceController  : require('./resourceController'),
     userController      : require('./userController'),
-    // zoneController      : require('./zoneController')
+    zoneController      : require('./zoneController')
 }

@@ -37,7 +37,7 @@ module.exports.createSkill = async ( request , response ) => {
 
         response.status(201).json( skill );
     }catch(err){
-        console.log( err )
+        // console.log( err )
         const errors = skillHandleErrors(err);
         response.status(400).json( errors );
 
