@@ -15,8 +15,10 @@ exports.router = (()=>{
     // apiRouter.route('/user').get( userAPI.getuserDetails );
     // apiRouter.route('/user').put( userAPI.getUserUpdate );
     apiRouter.route('/categories').get( categoryController.allCategories );
+    apiRouter.route('/categories/:id').get( categoryController.getCategory );
     apiRouter.route('/categories').post( categoryController.createCategory );
     apiRouter.route('/categories/:id').put( categoryController.updateCategory );
+    apiRouter.route('/categories/:id').delete( categoryController.deleteCategory );
 
     return apiRouter;
 
