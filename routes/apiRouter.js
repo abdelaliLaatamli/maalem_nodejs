@@ -1,6 +1,5 @@
 const express = require('express') ;
-const userController = require('./../controllers/userController');
-const categoryController = require('./../controllers/categoryController');
+const { userController , categoryController } = require('./../controllers');
 
 
 // routes 
