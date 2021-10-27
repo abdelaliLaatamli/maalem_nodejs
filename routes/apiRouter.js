@@ -3,7 +3,8 @@ const {
     userController , 
     categoryController , 
     skillController ,
-    zoneController
+    zoneController ,
+    cityController
 } = require('./../controllers');
 
 
@@ -27,7 +28,6 @@ exports.router = (()=>{
     apiRouter.route('/categories/:id').delete( categoryController.deleteCategory );
 
 
-
     // skills routes
     apiRouter.route('/skills').get( skillController.getSkills );
     apiRouter.route('/skills/:id').get( skillController.getSkill );
@@ -42,6 +42,14 @@ exports.router = (()=>{
     apiRouter.route('/zones').post( zoneController.createZone );
     apiRouter.route('/zones/:id').put( zoneController.updateZone );
     apiRouter.route('/zones/:id').delete( zoneController.deleteZone );
+
+    
+    // city routes
+    apiRouter.route('/cities').get( cityController.getCities );
+    apiRouter.route('/cities/:id').get( cityController.getCity );
+    apiRouter.route('/cities').post( cityController.createCity );
+    apiRouter.route('/cities/:id').put( cityController.updateCity );
+    apiRouter.route('/cities/:id').delete( cityController.deleteCity );
 
 
     return apiRouter;
