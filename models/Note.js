@@ -26,7 +26,7 @@ const noteShema = new mongoose.Schema({
         required: false
     }
 
-})
+},{ versionKey: false });
 
 const Note = mongoose.model('Note' , noteShema );
 

@@ -48,7 +48,7 @@ const userShema = new mongoose.Schema({
     }
     
 
-});
+},{ versionKey: false });
 
 
 // fire a function before doc saved to db

@@ -26,7 +26,7 @@ const feedbackShema = new mongoose.Schema({
     },
     notes:[]
 
-})
+},{ versionKey: false })
 
 const Feedback = mongoose.model('Feedback' , feedbackShema );
 

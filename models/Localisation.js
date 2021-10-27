@@ -11,7 +11,7 @@ const localisationShema = new mongoose.Schema({
         required: true
     }
     
-});
+},{ versionKey: false });
 
 
 const Localisation = mongoose.model('Localisation' , localisationShema);

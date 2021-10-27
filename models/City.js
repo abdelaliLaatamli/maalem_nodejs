@@ -21,7 +21,7 @@ const cityShema = new mongoose.Schema({
         required: false
     }
 
-})
+},{ versionKey: false })
 
 const City = mongoose.model('City' , cityShema );
 

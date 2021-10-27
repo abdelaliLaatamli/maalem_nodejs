@@ -21,7 +21,7 @@ const skillShema = new mongoose.Schema({
         required: false
     }
 
-})
+},{ versionKey: false });
 
 const Skill = mongoose.model('Skill' , skillShema );
 

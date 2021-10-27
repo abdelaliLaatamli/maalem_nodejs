@@ -26,7 +26,7 @@ const resourceShema = new mongoose.Schema({
         default: null ,
         required: false
     }
-})
+},{ versionKey: false });
 
 const Resource = mongoose.model('Resource' , resourceShema );
 

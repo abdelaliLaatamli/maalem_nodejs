@@ -8,10 +8,15 @@ const categoryShema = new mongoose.Schema({
         required :[ true , 'please enter an text' ],
         unique: true 
     },
-    subCategories: [{
+    parent: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Category"
-    }],
+        ref: "Category" ,
+        default: null
+    },
+    // subCategories: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Category"
+    // }],
     skills: [
         {
           type: mongoose.Schema.Types.ObjectId,
@@ -19,7 +24,7 @@ const categoryShema = new mongoose.Schema({
         }
     ]
 
-})
+}, { versionKey: false })
 
 const Category = mongoose.model('Category' , categoryShema );
 

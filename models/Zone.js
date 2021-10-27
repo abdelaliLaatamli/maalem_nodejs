@@ -27,7 +27,7 @@ const zoneShema = new mongoose.Schema({
         }
     ]
 
-})
+},{ versionKey: false });
 
 const Zone = mongoose.model('Zone' , zoneShema );
 
