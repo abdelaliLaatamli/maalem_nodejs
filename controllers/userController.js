@@ -1,4 +1,4 @@
-const { createUser , findUser } = require('./../repositories/userRepository');
+const { userRepository } = require('./../repositories');
 const generateToken  = require('./../utils/jwt.utils');
 const userHandleErrors = require('./../handlers/models/userHandlers');
 
@@ -7,7 +7,7 @@ module.exports.singUp = async ( request , response ) => {
     let { username , email, password , sex , bday } = request.body;
 
     try {
-        const user = await createUser({ username , email, password , sex , bday });
+        const user = await categoryRepository.createUser({ username , email, password , sex , bday });
         const token = generateToken(user._id);
         response.status(201).json({ user: user._id , token : token });
     } catch(err) {
@@ -25,7 +25,7 @@ module.exports.login = async ( request , response ) => {
     const { email , password } = request.body;
 
     try{
-        const user = await findUser(email , password);
+        const user = await categoryRepository.findUser(email , password);
 
         const token = generateToken(user._id);
         response.status(200).json({ user: user._id , token : token });

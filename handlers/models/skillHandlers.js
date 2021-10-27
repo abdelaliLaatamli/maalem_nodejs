@@ -15,7 +15,7 @@ const skillHandleErrors = (err) => {
     }
   
     // validation errors
-    if (err.message.includes('skill validation failed')) {
+    if (err.message.includes('Skill validation failed')) {
       Object.values(err.errors).forEach(({ properties }) => {
         errors[properties.path] = properties.message;
       });

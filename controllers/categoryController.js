@@ -1,10 +1,4 @@
-const { 
-    createCategory ,
-    updateCategory ,
-    allCategories ,
-    getCategory ,
-    deleleCategory
-} = require("./../repositories/categoryRepository");
+const { categoryRepository } = require("./../repositories");
 const categoryHandleErrors = require('./../handlers/models/categoryHandlers');
 
 
@@ -12,7 +6,7 @@ const categoryHandleErrors = require('./../handlers/models/categoryHandlers');
 module.exports.allCategories = async (request , response) => {
 
     try{
-        const categories = await allCategories();
+        const categories = await categoryRepository.allCategories();
         response.status(200).json( categories );
     }catch(err){
         const errors = categoryHandleErrors(err);
@@ -26,7 +20,7 @@ module.exports.getCategory = async ( request , response ) => {
     const categoryId = request.params.id
 
     try{
-        const category = await getCategory( categoryId );
+        const category = await categoryRepository.getCategory( categoryId );
         response.status(200).json( category )
     }catch(err){
         const errors = categoryHandleErrors(err);
@@ -39,7 +33,7 @@ module.exports.getCategory = async ( request , response ) => {
 module.exports.createCategory = async ( request , response ) => {
 
     try{
-        const category = await createCategory(request.body);
+        const category = await categoryRepository.createCategory(request.body);
         response.status(201).json( category );
     }catch(err){
 
@@ -53,7 +47,7 @@ module.exports.updateCategory = async ( request , response ) => {
 
     const categoryId = request.params.id;
     try{
-        const updatedCategory = await updateCategory( categoryId , request.body );
+        const updatedCategory = await categoryRepository.updateCategory( categoryId , request.body );
         response.status(202).json( updatedCategory );
     }catch(err){
         const errors = categoryHandleErrors(err);
@@ -68,7 +62,7 @@ module.exports.deleteCategory = async ( request , response ) => {
     const categoryId = request.params.id;
 
     try{
-        await deleleCategory( categoryId  ); 
+        await categoryRepository.deleleCategory( categoryId  ); 
         response.sendStatus(204);
     }catch(err){
         const errors = categoryHandleErrors(err);
