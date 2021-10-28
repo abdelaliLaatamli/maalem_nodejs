@@ -11,20 +11,20 @@ const mongoose = require('mongoose');
 // }
 
 
-module.exports.getPortFolio = async ( userId ) => {
+module.exports.getPortFolio = async ( portfolioId ) => {
      
-    // try{
+    try{
 
-    //     const city = await PortFolio.findById( cityId ).where({ status : true });
+        const portfolio = await PortFolio.findById( portfolioId );//.where({ status : true });
         
-    //     if( !city ){
-    //         throw Error('City Not found');
-    //     }
+        if( !portfolio ){
+            throw Error('Portfolio Not found');
+        }
 
-    //     return city ;
-    // }catch(e){
-    //     throw e
-    // }
+        return portfolio ;
+    }catch(e){
+        throw e
+    }
 }
 
 
@@ -80,34 +80,55 @@ module.exports.createPortFolio = async ( userId , portFolio ) => {
 
 module.exports.updatePortfolio = async ( portfolioId , portFolio ) => {
 
-    try{
+    // try{
 
-        const cityFound = await PortFolio.findById( portfolioId ).where({ status : true});
+    //     const cityFound = await PortFolio.findById( portfolioId ).where({ status : true});
 
-        if( !cityFound ){
-            throw Error('City Not found');
-        }
+    //     if( !cityFound ){
+    //         throw Error('City Not found');
+    //     }
 
-        return await PortFolio.findByIdAndUpdate( portfolioId , portFolio , { new: true } );
+    //     return await PortFolio.findByIdAndUpdate( portfolioId , portFolio , { new: true } );
 
-    }catch(e){
-        throw e; 
-    }
+    // }catch(e){
+    //     throw e; 
+    // }
 }
 
-module.exports.delelePortfolio = async ( portfolioId , userId ) => {
+module.exports.delelePortfolio = async ( portfolioId ) => {
+    
+    const session = await mongoose.startSession(); 
 
-    try{
-        const portfolioFound = await PortFolio.findById(portfolioId);
+    session.startTransaction();
 
-        if( !portfolioFound ){
-            throw Error('City Not found');
+    try {
+
+        const user = await User.findOne( { portfolio : portfolioId } );
+
+        const portFolio = await PortFolio.findById( portfolioId );
+
+        if( !portFolio ){
+            throw Error('Portfolio Not found');
         }
 
-        return await PortFolio.findByIdAndUpdate( portfolioId , { status : false , oldUser : userId  , deleted_at : Date.now() } );
+        await PortFolio.findByIdAndDelete( portfolioId  , {  session  });
+        
 
-    }catch(e){
-        throw e ;
+        await User.findByIdAndUpdate( user._id , { portfolio: null } , {session} );//findOne( { portfolio : portfolioId } );
+       
+        await session.commitTransaction();
+        session.endSession();
+
+        console.log('success');
+
+        // return createdPortFolio ;
+
+    } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
+        // console.log(error);
+        console.log('faild');
+        throw error ;
     }
 
 }
