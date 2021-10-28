@@ -31,26 +31,29 @@ module.exports.getPortFolio = async ( userId ) => {
 
 module.exports.createPortFolio = async ( userId , portFolio ) => {
 
-    try{
-        // mongoose
-        // const session = await PortFolio.startSession();
-        const session = await mongoose.startSession();
+    try {
+        const session = await mongoose.startSession();     
+                                     
+        const createdPortFolio = await session.withTransaction(async () => { 
 
-        const createdPortFolios = await session.withTransaction( async () => {
-            console.log(portFolio)
-            const createdPortFolio = await PortFolio.create( [portFolio] , { session: session } );
-            console.log(createdPortFolio._id)
-            // await User.findByIdAndUpdate( userId , { portfolio : createdPortFolio._id } );
-            await User.findByIdAndUpdate( userId , { portfolio :createdPortFolio._id } , { session: session });
-            return createdPortFolio;
-            // return Customer.create([{ name: 'Test' }], { session: session })
+            const createdPortFolios = await PortFolio.create( [ portFolio ] , { session } );
+            // console.log(createdPortFolio)
+            // console.log(createdPortFolio[0]._id)
+            // await User.findByIdAndUpdate( userId , { portfolio : reatedPortFolio[0]._id } , {  session  });
+            await User.findByIdAndUpdate( userId , { portfolio : createdPortFolios[0]._id } , {  session  });
+    
+            return createdPortFolios;
         });
- 
+
         session.endSession();
-        return createdPortFolios;
-    } catch(e) {
-        throw e;
+
+        console.log('success');
+        return createdPortFolio ;
+    } catch (error) {
+        console.log(error);
     }
+
+    
 
 }
 
