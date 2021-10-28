@@ -9,6 +9,7 @@
 
 
 # Convert Shard | Standalone to Replica Set | to transaction works
+- add mongo db to path
 - go to file ```C:\Program Files\MongoDB\Server\5.0\bin\mongod.cfg``` add this lines 
 ``````
 replication:
