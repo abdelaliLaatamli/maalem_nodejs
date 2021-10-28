@@ -28,49 +28,6 @@ module.exports.getPortFolio = async ( userId ) => {
 }
 
 
-
-// module.exports.createPortFolio = async ( userId , portFolio ) => {
-
-//     try {
-//         const session = await mongoose.startSession();     
-                                     
-//         const createdPortFolio = await session.withTransaction(async () => { 
-
-//             const user = await User.findById(userId);
-
-//             if( !user ){
-//                 throw Error('User not found');
-//             }
-
-//             if( user.portfolio != null ){
-//                 throw Error('User already have a portFolio');
-//             }
-
-//             const createdPortFolios = await PortFolio.create( [ portFolio ] , { session } );
-
-
-//             if( !createdPortFolios[0]._id ){
-//                 throw Error('PortFolio Not Created');
-//             }
-
-//             await User.findByIdAndUpdate( userId , { portfolio : createdPortFolios[0]._id } , {  session  });
-    
-//             return createdPortFolios;
-//         });
-
-//         session.endSession();
-
-//         console.log('success');
-//         return createdPortFolio ;
-//     } catch (error) {
-        
-//         console.log(error);
-//         console.log('faild');
-//         throw error ;
-//     }
-
-// }
-
 module.exports.createPortFolio = async ( userId , portFolio ) => {
 
     const session = await mongoose.startSession(); 
@@ -107,7 +64,7 @@ module.exports.createPortFolio = async ( userId , portFolio ) => {
         session.endSession();
 
         console.log('success');
-        
+
         return createdPortFolio ;
 
     } catch (error) {
