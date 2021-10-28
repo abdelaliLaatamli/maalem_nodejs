@@ -36,10 +36,23 @@ module.exports.createPortFolio = async ( userId , portFolio ) => {
                                      
         const createdPortFolio = await session.withTransaction(async () => { 
 
+            const user = await User.findById(userId);
+            console.log( user );
+
+            if( !user ){
+                throw Error('User not found');
+            }
+
+            if( user.portfolio != null ){
+                throw Error('User already have a portFolio');
+            }
+
             const createdPortFolios = await PortFolio.create( [ portFolio ] , { session } );
-            // console.log(createdPortFolio)
-            // console.log(createdPortFolio[0]._id)
-            // await User.findByIdAndUpdate( userId , { portfolio : reatedPortFolio[0]._id } , {  session  });
+
+            if( createdPortFolio[0]._id ){
+                throw Error('PortFolio Not Created');
+            }
+
             await User.findByIdAndUpdate( userId , { portfolio : createdPortFolios[0]._id } , {  session  });
     
             return createdPortFolios;
@@ -50,7 +63,10 @@ module.exports.createPortFolio = async ( userId , portFolio ) => {
         console.log('success');
         return createdPortFolio ;
     } catch (error) {
+        
         console.log(error);
+        console.log('faild');
+        throw error ;
     }
 
     
