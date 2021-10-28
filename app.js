@@ -15,7 +15,7 @@ const apiRouter = require('./routes/apiRouter').router;
 
 
 // database connection
-// const dbURI = `mongodb://${dbhost}:${dbport}/${dbname}?replicaSet=rs`;
+// const dbURI = `mongodb://${dbhost}:${dbport}/${dbname}?replicaSet=rs`;.
 const dbURI = `mongodb://${dbhost}:${dbport}/${dbname}`;
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
