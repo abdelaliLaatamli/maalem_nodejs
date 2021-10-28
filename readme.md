@@ -20,5 +20,5 @@ replication:
 - ``` net STOP MongoDB ```
 - ``` net START MongoDB ```
 
-- to entre inside  ```mongo --port 27017``` and inside put ```s.initiate()``` and check result 
+- to entre inside  ```mongo --port 27017``` and inside put ```rs.initiate()``` and check result 
 

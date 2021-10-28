@@ -29,47 +29,94 @@ module.exports.getPortFolio = async ( userId ) => {
 
 
 
+// module.exports.createPortFolio = async ( userId , portFolio ) => {
+
+//     try {
+//         const session = await mongoose.startSession();     
+                                     
+//         const createdPortFolio = await session.withTransaction(async () => { 
+
+//             const user = await User.findById(userId);
+
+//             if( !user ){
+//                 throw Error('User not found');
+//             }
+
+//             if( user.portfolio != null ){
+//                 throw Error('User already have a portFolio');
+//             }
+
+//             const createdPortFolios = await PortFolio.create( [ portFolio ] , { session } );
+
+
+//             if( !createdPortFolios[0]._id ){
+//                 throw Error('PortFolio Not Created');
+//             }
+
+//             await User.findByIdAndUpdate( userId , { portfolio : createdPortFolios[0]._id } , {  session  });
+    
+//             return createdPortFolios;
+//         });
+
+//         session.endSession();
+
+//         console.log('success');
+//         return createdPortFolio ;
+//     } catch (error) {
+        
+//         console.log(error);
+//         console.log('faild');
+//         throw error ;
+//     }
+
+// }
+
 module.exports.createPortFolio = async ( userId , portFolio ) => {
 
+    const session = await mongoose.startSession(); 
+
+    session.startTransaction();
+
     try {
-        const session = await mongoose.startSession();     
-                                     
-        const createdPortFolio = await session.withTransaction(async () => { 
 
-            const user = await User.findById(userId);
-            console.log( user );
+        const user = await User.findById(userId);
 
-            if( !user ){
-                throw Error('User not found');
-            }
+        if( !user ){
+            throw Error('User not found');
+        }
 
-            if( user.portfolio != null ){
-                throw Error('User already have a portFolio');
-            }
+        if( user.portfolio != null ){
+            throw Error('User already have a portFolio');
+        }
 
-            const createdPortFolios = await PortFolio.create( [ portFolio ] , { session } );
+        const createdPortFolios = await PortFolio.create( [ portFolio ] , { session } );
 
-            if( createdPortFolio[0]._id ){
-                throw Error('PortFolio Not Created');
-            }
+        if( createdPortFolios.length !== 1 ){
+            throw Error(`PortFolio Objects ${createdPortFolios.length}`);
+        }
 
-            await User.findByIdAndUpdate( userId , { portfolio : createdPortFolios[0]._id } , {  session  });
-    
-            return createdPortFolios;
-        });
+        const createdPortFolio = createdPortFolios[0] ;
 
+        if( !createdPortFolio._id ){
+            throw Error('PortFolio Not Created');
+        }
+
+        await User.findByIdAndUpdate( userId , { portfolio : createdPortFolio._id } , {  session  });
+       
+        await session.commitTransaction();
         session.endSession();
 
         console.log('success');
-        return createdPortFolio ;
-    } catch (error) {
         
+        return createdPortFolio ;
+
+    } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
         console.log(error);
         console.log('faild');
         throw error ;
     }
-
-    
 
 }
 
