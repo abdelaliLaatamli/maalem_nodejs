@@ -14,7 +14,7 @@ module.exports.getResource = async ( resourceId ) => {
      
     try{
 
-        const resources = await Resource.findById(resourceId).where({ status : true });;//.populate('category').exec();
+        const resources = await Resource.findById(resourceId).where({ status : true });//.populate('category').exec();
         
         if( !resources ){
             throw Error('Resource Not found');
@@ -59,6 +59,7 @@ module.exports.updateResource = async ( resourceId , resource ) => {
 module.exports.deleleResource = async ( resourceId ) => {
 
     try{
+        // TODO: if delete here delete from portfolio also
         const resourceFound = await Resource.findById(resourceId);
 
         if( !resourceFound ){
