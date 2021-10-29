@@ -1,21 +1,21 @@
 // handle errors
-const cityHandleErrors = (err) => {
+const resourcesHandleErrors = (err) => {
 
     let errors = { };
 
   
     // incorrect password
-    if (err.message === 'City Not found') {
-        errors['skill'] = err.message ;
+    if (err.message === 'Resource Not found') {
+        errors['resource'] = err.message ;
     }
   
     // duplicate email error
     if (err.code === 11000) {
-        errors['name'] = 'city name already existe';
+        errors['name'] = 'resource name already existe';
     }
   
     // validation errors
-    if (err.message.includes('City validation failed')) {
+    if (err.message.includes('Resource validation failed')) {
       Object.values(err.errors).forEach(({ properties }) => {
         errors[properties.path] = properties.message;
       });
@@ -27,4 +27,4 @@ const cityHandleErrors = (err) => {
     return errors;
 }
 
-module.exports = cityHandleErrors; 
+module.exports = resourcesHandleErrors; 

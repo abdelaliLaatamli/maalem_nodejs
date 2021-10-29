@@ -5,5 +5,6 @@ module.exports = {
     zoneRepository        : require('./zoneRepository')       ,
     cityRepository        : require('./cityRepository')       ,
     portfolioRepository   : require('./portfolioRepository')  ,
+    resourceRepository    : require('./resourceRepository')  ,
 
 }

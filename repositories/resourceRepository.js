@@ -3,7 +3,7 @@ const { Resource } = require('../models');
 
 module.exports.getResources = async () => {
     try{
-        return  await Resource.find().where({ status : true }).populate('category');
+        return  await Resource.find().where({ status : true });//.populate('category');
     }catch(e){
         throw e
     }

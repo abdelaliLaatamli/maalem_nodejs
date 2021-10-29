@@ -61,11 +61,11 @@ exports.router = (()=>{
     apiRouter.route('/portfolios/:id').delete( portFolioController.deletePortFolio );
 
     // city routes
-    apiRouter.route('/resources').get( resourceController.getCities );
-    apiRouter.route('/resources/:id').get( resourceController.getCity );
-    apiRouter.route('/resources').post( resourceController.createCity );
-    apiRouter.route('/resources/:id').put( resourceController.updateCity );
-    apiRouter.route('/resources/:id').delete( resourceController.deleteCity );
+    apiRouter.route('/resources').get( resourceController.getResources );
+    apiRouter.route('/resources/:id').get( resourceController.getResource );
+    apiRouter.route('/resources').post( resourceController.createResource );
+    apiRouter.route('/resources/:id').put( resourceController.updateResource );
+    apiRouter.route('/resources/:id').delete( resourceController.deleteResource );
 
     return apiRouter;
 

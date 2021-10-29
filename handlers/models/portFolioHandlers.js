@@ -1,5 +1,5 @@
 // handle errors
-const zoneHandleErrors = (err) => {
+const portfolioHandleErrors = (err) => {
 
     let errors = { };
 
@@ -43,4 +43,4 @@ const zoneHandleErrors = (err) => {
     return errors;
 }
 
-module.exports = zoneHandleErrors; 
+module.exports = portfolioHandleErrors; 
