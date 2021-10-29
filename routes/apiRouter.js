@@ -5,7 +5,8 @@ const {
     skillController ,
     zoneController ,
     cityController,
-    portFolioController
+    portFolioController ,
+    resourceController
 } = require('./../controllers');
 
 
@@ -58,6 +59,13 @@ exports.router = (()=>{
     apiRouter.route('/portfolios/:id').get( portFolioController.getPortFolio );
     apiRouter.route('/portfolios/:id').put( portFolioController.updatePortFolio );
     apiRouter.route('/portfolios/:id').delete( portFolioController.deletePortFolio );
+
+    // city routes
+    apiRouter.route('/resources').get( resourceController.getCities );
+    apiRouter.route('/resources/:id').get( resourceController.getCity );
+    apiRouter.route('/resources').post( resourceController.createCity );
+    apiRouter.route('/resources/:id').put( resourceController.updateCity );
+    apiRouter.route('/resources/:id').delete( resourceController.deleteCity );
 
     return apiRouter;
 

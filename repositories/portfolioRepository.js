@@ -1,4 +1,4 @@
-const { User , PortFolio , Resources } = require('../models');
+const { User , PortFolio , Resource } = require('../models');
 const mongoose = require('mongoose');
 
 
@@ -44,7 +44,7 @@ module.exports.createPortFolio = async ( userId , portFolio ) => {
             if( portFolio.resources.length > 0 ){
                 // TODO: chech if object for create or just string 
                 const resourcesDto = portFolio.resources;
-                const resources = await Resources.create( resourcesDto , {session} );
+                const resources = await Resource.create( resourcesDto , {session} );
                 const resourseIds = resources.map( resource => resource._id );
                 portFolio.resources = resourseIds
             }
@@ -104,7 +104,7 @@ module.exports.updatePortfolio = async ( portfolioId , portFolio ) => {
                 const resourcesbkp = portFolio.resources;
                 const resourcesIds = resourcesbkp.filter( resource => typeof resource === 'string' );
                 const resourcesDto = resourcesbkp.filter( resource => typeof resource === 'object' );
-                const resources = await Resources.create( resourcesDto , {session} );
+                const resources = await Resource.create( resourcesDto , {session} );
                 const resourseCreatedIds = resources.map( resource => resource._id );
                 const resourcesAllIds = [ ...resourcesIds , ...resourseCreatedIds ];
                 portFolio.resources = resourcesAllIds;
@@ -129,20 +129,6 @@ module.exports.updatePortfolio = async ( portfolioId , portFolio ) => {
         throw error ;
     }
 
-    // return { portfolioId , portFolio }
-    // try{
-
-    //     const cityFound = await PortFolio.findById( portfolioId ).where({ status : true});
-
-    //     if( !cityFound ){
-    //         throw Error('City Not found');
-    //     }
-
-    //     return await PortFolio.findByIdAndUpdate( portfolioId , portFolio , { new: true } );
-
-    // }catch(e){
-    //     throw e; 
-    // }
 }
 
 module.exports.delelePortfolio = async ( portfolioId ) => {

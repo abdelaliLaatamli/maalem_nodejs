@@ -2,6 +2,7 @@ const { portfolioRepository } = require('./../repositories');
 const portFolioHandlers = require('./../handlers/models/portFolioHandlers');
 
 module.exports.getPortFolio = async ( request , response ) => {
+    
 
     const portfolioId = request.params.id ;
 

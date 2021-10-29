@@ -4,7 +4,7 @@ module.exports = {
     Feedback      : require('./../models/Feedback') ,
     Zone          : require('./../models/Zone') ,
     Skill         : require('./../models/Skill') ,
-    Resources     : require('./../models/Resources'),
+    Resource      : require('./../models/Resource'),
     PortFolio     : require('./../models/PortFolio'),
     Note          : require('./../models/Note'),
     Localisation  : require('./../models/Localisation'),

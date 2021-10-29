@@ -3,7 +3,7 @@ module.exports = {
     skillController     : require('./skillController'),
     cityController      : require('./cityController'),
     portFolioController : require('./portFolioController'),
-    // resourceController  : require('./resourceController'),
+    resourceController  : require('./resourceController'),
     userController      : require('./userController'),
     zoneController      : require('./zoneController')
 }
