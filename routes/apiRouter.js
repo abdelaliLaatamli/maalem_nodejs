@@ -56,6 +56,7 @@ exports.router = (()=>{
     // portfolio routes
     apiRouter.route('/portfolios').post( portFolioController.createPortFolio );
     apiRouter.route('/portfolios/:id').get( portFolioController.getPortFolio );
+    apiRouter.route('/portfolios/:id').put( portFolioController.updatePortFolio );
     apiRouter.route('/portfolios/:id').delete( portFolioController.deletePortFolio );
 
     return apiRouter;

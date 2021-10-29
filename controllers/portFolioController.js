@@ -39,15 +39,33 @@ module.exports.createPortFolio = async ( request , response ) => {
 }
 
 
+module.exports.updatePortFolio = async ( request , response ) => {
+
+    const portfolioId = request.params.id;
+    const portfolio = request.body ;
+
+    try{
+        
+        const updatedPortfolio = await portfolioRepository.updatePortfolio(portfolioId , portfolio);
+        response.status(202).json( updatedPortfolio );
+
+    }catch(err){
+        const errors = portFolioHandlers(err); 
+        response.status(400).json(errors);
+    }
+
+    
+}
+
+
 module.exports.deletePortFolio = async ( request , response ) => {
 
     const portfolioId = request.params.id ;
 
     try{
         
-        // const portfolio = await portfolioRepository.deletePortFolio( portfolioId );
         await portfolioRepository.delelePortfolio( portfolioId );
-        response.sendStatus(204); //sendStatus(204);
+        response.sendStatus(204); 
 
     }catch(err){
 

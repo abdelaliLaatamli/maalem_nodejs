@@ -20,18 +20,18 @@ const zoneHandleErrors = (err) => {
     }
 
     // incorrect password
-    if (err.message.includes('PortFolio Objects') ) {
+    if ( err.message && err.message.includes('PortFolio Objects') ) {
         errors['portfolio'] = err.message ;
     }
 
         // incorrect password
-    if (err.message.includes('Portfolio Not found') ) {
+    if (err.message === 'Portfolio Not found' ) {
         errors['portfolio'] = err.message ;
     }
 
     
     // validation errors
-    if (err.message.includes('Portfolio validation failed')) {
+    if ( err.message && err.message.includes('Portfolio validation failed')) {
       Object.values(err.errors).forEach(({ properties }) => {
         errors[properties.path] = properties.message;
       });

@@ -1,14 +1,6 @@
-const { User , PortFolio } = require('../models');
+const { User , PortFolio , Resources } = require('../models');
 const mongoose = require('mongoose');
 
-
-// module.exports.getCities = async () => {
-//     try{
-//         return  await City.find().where({ status : true });
-//     }catch(e){
-//         throw e
-//     }
-// }
 
 
 module.exports.getPortFolio = async ( portfolioId ) => {
@@ -46,6 +38,21 @@ module.exports.createPortFolio = async ( userId , portFolio ) => {
             throw Error('User already have a portFolio');
         }
 
+        // check resouces is 
+        if( portFolio.resources ){
+
+            if( portFolio.resources.length > 0 ){
+                // TODO: chech if object for create or just string 
+                const resourcesDto = portFolio.resources;
+                const resources = await Resources.create( resourcesDto , {session} );
+                const resourseIds = resources.map( resource => resource._id );
+                portFolio.resources = resourseIds
+            }
+
+        }
+
+
+
         const createdPortFolios = await PortFolio.create( [ portFolio ] , { session } );
 
         if( createdPortFolios.length !== 1 ){
@@ -80,6 +87,49 @@ module.exports.createPortFolio = async ( userId , portFolio ) => {
 
 module.exports.updatePortfolio = async ( portfolioId , portFolio ) => {
 
+
+    const session = await mongoose.startSession(); 
+
+    session.startTransaction();
+
+    try {
+
+
+        // check resouces is 
+        if( portFolio.resources ){
+
+            if( portFolio.resources.length > 0 ){
+
+                // TODO: chech if object for create or just string 
+                const resourcesbkp = portFolio.resources;
+                const resourcesIds = resourcesbkp.filter( resource => typeof resource === 'string' );
+                const resourcesDto = resourcesbkp.filter( resource => typeof resource === 'object' );
+                const resources = await Resources.create( resourcesDto , {session} );
+                const resourseCreatedIds = resources.map( resource => resource._id );
+                const resourcesAllIds = [ ...resourcesIds , ...resourseCreatedIds ];
+                portFolio.resources = resourcesAllIds;
+            }
+    
+        }
+
+        const updatedPortFolio = await PortFolio.findByIdAndUpdate( portfolioId , portFolio , {  session , new : true  });
+       
+        await session.commitTransaction();
+        session.endSession();
+
+        console.log('success');
+
+        return updatedPortFolio ;
+
+    } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
+        console.log(error);
+        console.log('faild');
+        throw error ;
+    }
+
+    // return { portfolioId , portFolio }
     // try{
 
     //     const cityFound = await PortFolio.findById( portfolioId ).where({ status : true});
