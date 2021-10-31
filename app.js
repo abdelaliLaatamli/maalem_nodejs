@@ -1,6 +1,7 @@
 const express = require( "express" ),
 app = express(),
-{ port , dbhost , dbname , dbport } = require('./config'),
+{ port , dbhost , dbname , dbport } = require("./config"),
+{ handler404 , handler500 } = require('./handlers/errors'),
 mongoose = require('mongoose'),
 cors = require('cors');
 
@@ -38,20 +39,5 @@ app.get('/' , (request , response) => {
 })
 
 
-app.get('/dd' , (request , response) => {
-    console.log( "aaaa" )
-    egdkcod;
-    // throw Error('this is an error');
-})
-
-// handlers of error messaeg
-app.use(function (err, req, res, next) {
-
-    res.status(500).json({ error : 'Something broke!' });
-
-})
-
-// handler for not found page 
-app.use(function ( req, res, next ) {
-    res.status(404).json({ error : 'Page not found ' });
-})
+// handlers for 404 and 500
+app.use(handler404 , handler500)
