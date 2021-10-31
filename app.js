@@ -44,12 +44,14 @@ app.get('/dd' , (request , response) => {
     // throw Error('this is an error');
 })
 
+// handlers of error messaeg
 app.use(function (err, req, res, next) {
 
     res.status(500).json({ error : 'Something broke!' });
-    
+
 })
 
+// handler for not found page 
 app.use(function ( req, res, next ) {
     res.status(404).json({ error : 'Page not found ' });
 })
