@@ -39,5 +39,12 @@ app.get('/' , (request , response) => {
 })
 
 
+app.get('/dd' , (request , response) => {
+    console.log( "aaaa" )
+    egdkcod;
+    // throw Error('this is an error');
+});
+
+
 // handlers for 404 and 500
 app.use(handler404 , handler500)
