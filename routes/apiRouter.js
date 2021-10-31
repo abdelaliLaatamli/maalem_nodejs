@@ -8,16 +8,16 @@ const {
     portFolioController ,
     resourceController
 } = require('./../controllers');
-const { authMidleware , pMidleware } = require('./../middleware');
+// const { authMidleware , pMidleware } = require('./../middleware');
 
 // routes 
 exports.router = (()=>{
 
-    var apiRouter = express.Router();
+    const apiRouter = express.Router();
 
-    // user routes
-    apiRouter.route('/register').post( userController.singUp );
-    apiRouter.route('/login').post( userController.login );
+    // // user routes
+    // apiRouter.route('/register').post( userController.singUp );
+    // apiRouter.route('/login').post( userController.login );
     apiRouter.route('/user/profile').get( userController.userProfile );
     // apiRouter.route('/user').get( userAPI.getuserDetails );
     // apiRouter.route('/user').put( userAPI.getUserUpdate );
@@ -61,7 +61,7 @@ exports.router = (()=>{
     apiRouter.route('/portfolios/:id').delete( portFolioController.deletePortFolio );
 
     // city routes
-    apiRouter.route('/resources').get( [ authMidleware , pMidleware ] , resourceController.getResources );
+    apiRouter.route('/resources').get( resourceController.getResources );
     apiRouter.route('/resources/:id').get( resourceController.getResource );
     apiRouter.route('/resources').post( resourceController.createResource );
     apiRouter.route('/resources/:id').put( resourceController.updateResource );

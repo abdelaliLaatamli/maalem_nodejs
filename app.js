@@ -4,15 +4,14 @@ app = express(),
 { handler404 , handler500 } = require('./handlers/errors'),
 mongoose = require('mongoose'),
 cors = require('cors');
+const { apiAuthRouter , apiRouter } = require('./routes');
+const { authMidleware } = require('./middleware');
 
 
 app.set( 'port', port );
 
 app.use( cors() );
 app.use( express.json() );
-
-const apiRouter = require('./routes/apiRouter').router;
-
 
 
 // database connection
@@ -31,13 +30,10 @@ app.listen( app.get('port') , function() {
     console.log('Node app is running on port', app.get('port'));
 });
 
-
-app.use('/api' , apiRouter );
-
-// app.get('/' , (request , response) => {
-//     response.send("server work")
-// });
-
+// auth router
+app.use('/api' , authMidleware , apiRouter );
+// api router
+app.use('/api' , apiAuthRouter );
 
 // handlers for 404 and 500
 app.use(handler404 , handler500)
