@@ -15,7 +15,6 @@ app.use( express.json() );
 
 
 // database connection
-// const dbURI = `mongodb://${dbhost}:${dbport}/${dbname}?replicaSet=rs`;.
 const dbURI = `mongodb://${dbhost}:${dbport}/${dbname}`;
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
