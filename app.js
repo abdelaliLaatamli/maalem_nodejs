@@ -30,9 +30,9 @@ app.listen( app.get('port') , function() {
 });
 
 // api router
-app.use('/api' , apiAuthRouter );
+app.use('/api/v1/auth' , apiAuthRouter );
 // auth router
-app.use('/api' , authMidleware , apiRouter );
+app.use('/api/v1' , authMidleware , apiRouter );
 
 
 
