@@ -29,10 +29,12 @@ app.listen( app.get('port') , function() {
     console.log('Node app is running on port', app.get('port'));
 });
 
-// auth router
-app.use('/api' , authMidleware , apiRouter );
 // api router
 app.use('/api' , apiAuthRouter );
+// auth router
+app.use('/api' , authMidleware , apiRouter );
+
+
 
 // handlers for 404 and 500
 app.use(handler404 , handler500)
