@@ -32,18 +32,11 @@ app.listen( app.get('port') , function() {
 });
 
 
-app.use('/api' , apiRouter);
+app.use('/api' , apiRouter );
 
-app.get('/' , (request , response) => {
-    response.send("server work")
-})
-
-
-app.get('/dd' , (request , response) => {
-    console.log( "aaaa" )
-    egdkcod;
-    // throw Error('this is an error');
-});
+// app.get('/' , (request , response) => {
+//     response.send("server work")
+// });
 
 
 // handlers for 404 and 500

@@ -1,4 +1,4 @@
-const { jwtsecret } = require('./../config');
+const { jwtsecret } = require('../config');
 const jwt = require('jsonwebtoken')
 
 // max age of jwt token

@@ -9,7 +9,6 @@ const {
     resourceController
 } = require('./../controllers');
 const { authMidleware , pMidleware } = require('./../middleware');
-// const aa = require('./../middlewarce/authMidleware');
 
 // routes 
 exports.router = (()=>{
