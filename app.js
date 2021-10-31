@@ -30,8 +30,26 @@ app.listen( app.get('port') , function() {
     console.log('Node app is running on port', app.get('port'));
 });
 
+
 app.use('/api' , apiRouter);
 
 app.get('/' , (request , response) => {
     response.send("server work")
+})
+
+
+app.get('/dd' , (request , response) => {
+    console.log( "aaaa" )
+    egdkcod;
+    // throw Error('this is an error');
+})
+
+app.use(function (err, req, res, next) {
+
+    res.status(500).json({ error : 'Something broke!' });
+    
+})
+
+app.use(function ( req, res, next ) {
+    res.status(404).json({ error : 'Page not found ' });
 })
